@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Container } from 'react-bootstrap';
 import { CustomPagination, MoviesTable } from '../components';
 import axios from 'axios';
+import Image from 'next/image';
 
 
 export async function getStaticProps() {
@@ -29,7 +30,7 @@ export default function Home({ movies, length }) {
 
   useEffect(() => {
     window.localStorage.setItem('PAGE_ITEM_NUMBER', JSON.stringify(pageItemNumber));
-  }, [pageItemNumber]);
+  }, [ pageItemNumber ]);
 
   const handlePageChange = async (page) => {
     setPage(page);
@@ -88,21 +89,32 @@ export default function Home({ movies, length }) {
       </Container>
       <footer style={
         {
+          display: 'flex',
           position: 'fixed',
+          justifyContent: 'end',
           bottom: '0',
           width: '100%',
           height: '80px',
           color: '#363c43',
           textAlign: 'end',
-          padding: '25px'
+          padding: '35px',
+          alignItems: 'center',
         }
       }>
-        Hosted with Surge <img src="/surge-icon.svg" alt="Surge" style={
-        {
-          height: '35px',
-          marginLeft: '5px'
-        }
-      } />
+        <p style={
+          {
+            fontSize: '16px',
+            color: '#363c43',
+            marginTop: '15px',
+            marginRight: '8px'
+          }
+        }>Hosted with </p>
+        <Image
+          src='/vercel.svg'
+          alt='Picture of the author'
+          width={ 80 }
+          height={ 80 }
+        />
       </footer>
     </div>
   );
